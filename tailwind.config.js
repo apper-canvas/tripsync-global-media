@@ -61,11 +61,11 @@ export default {
   				accent: 'hsl(var(--sidebar-accent))',
   				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
   				border: 'hsl(var(--sidebar-border))',
-  				ring: 'hsl(var(--sidebar-ring))'
+ring: 'hsl(var(--sidebar-ring))'
   			},
-travel: {
-				50: 'hsl(var(--travel-50))',
-				100: 'hsl(var(--travel-100))',
+  			travel: {
+  				50: 'hsl(var(--travel-50))',
+  				100: 'hsl(var(--travel-100))',
 				200: 'hsl(var(--travel-200))',
 				300: 'hsl(var(--travel-300))',
 				400: 'hsl(var(--travel-400))',
