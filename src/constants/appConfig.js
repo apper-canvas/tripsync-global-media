@@ -72,10 +72,53 @@ export const updateTypes = {
     icon: 'Home',
     color: 'pink'
   },
-  participants: {
+participants: {
     label: 'Participants',
     icon: 'Users',
     color: 'travel'
+  },
+  payment: {
+    label: 'Payment',
+    icon: 'CreditCard',
+    color: 'emerald'
+  }
+};
+
+export const paymentMethods = {
+  cash: {
+    label: 'Cash',
+    icon: 'Banknote'
+  },
+  venmo: {
+    label: 'Venmo',
+    icon: 'CreditCard'
+  },
+  paypal: {
+    label: 'PayPal',
+    icon: 'CreditCard'
+  },
+  zelle: {
+    label: 'Zelle',
+    icon: 'CreditCard'
+  },
+  splitwise: {
+    label: 'Splitwise',
+    icon: 'CreditCard'
+  }
+};
+
+export const paymentStatuses = {
+  pending: {
+    label: 'Pending',
+    color: 'orange'
+  },
+  completed: {
+    label: 'Completed',
+    color: 'green'
+  },
+  failed: {
+    label: 'Failed',
+    color: 'red'
   }
 };
 

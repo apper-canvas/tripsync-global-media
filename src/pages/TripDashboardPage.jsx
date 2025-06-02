@@ -32,30 +32,40 @@ const TripDashboardPage = () => {
         <TripOverviewSection 
           trip={trip} 
           currentUser={currentUser}
-        />
+/>
       </motion.div>
 
-<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Left Column - Participants & Budget */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="lg:col-span-1 space-y-8"
->
+        >
           <ParticipantListSection tripId={trip.id} />
           <BudgetSection tripId={trip.id} />
-          <DocumentsSection tripId={trip.id} />
         </motion.div>
 
-        <motion.div
+        {/* Right Column - Documents */}
+        <motion.div 
+          className="lg:col-span-2 space-y-6"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="lg:col-span-2"
+          transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <UpdatesFeedSection tripId={trip.id} />
+          <DocumentsSection tripId={trip.id} />
         </motion.div>
       </div>
+
+      {/* Updates Feed - Full Width */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+      >
+        <UpdatesFeedSection tripId={trip.id} />
+      </motion.div>
     </div>
   );
 };

@@ -11,8 +11,10 @@ export const useTripData = (tripId) => {
   const [participants, setParticipants] = useState([]);
   const [activities, setActivities] = useState([]);
   const [updates, setUpdates] = useState([]);
-  const [documents, setDocuments] = useState([]);
+const [documents, setDocuments] = useState([]);
   const [expenses, setExpenses] = useState([]);
+  const [payments, setPayments] = useState([]);
+  const [paymentBalances, setPaymentBalances] = useState({});
   const [budget, setBudget] = useState({
     total: 5000,
     categories: {
@@ -260,6 +262,115 @@ setUpdates(prev => [update, ...prev]);
     };
     
     setUpdates(prev => [update, ...prev]);
+};
+
+  const splitExpense = (expenseData) => {
+    const { amount, description, category, date, splitType, participants: selectedParticipants, customAmounts } = expenseData;
+    
+    // Add the expense first
+    addExpense({ amount, description, category, date });
+    
+    let splits = [];
+    
+    if (splitType === 'equal') {
+      const splitAmount = amount / selectedParticipants.length;
+      splits = selectedParticipants.map(participantId => ({
+        participantId,
+        amount: splitAmount
+      }));
+    } else if (splitType === 'custom') {
+      splits = Object.entries(customAmounts).map(([participantId, amount]) => ({
+        participantId,
+        amount: parseFloat(amount)
+      }));
+    }
+    
+    // Update payment balances
+    const payerId = expenseData.paidBy || 'user1';
+    setPaymentBalances(prev => {
+      const updated = { ...prev };
+      
+      splits.forEach(split => {
+        if (split.participantId !== payerId) {
+          updated[split.participantId] = updated[split.participantId] || {};
+          updated[split.participantId][payerId] = (updated[split.participantId][payerId] || 0) + split.amount;
+        }
+      });
+      
+      return updated;
+    });
+    
+    // Add update to feed
+    const update = {
+      id: Date.now().toString(),
+      userId: 'user1',
+      userName: 'Current User',
+      action: 'expense_split',
+      message: `split $${amount} expense: ${description}`,
+      timestamp: new Date().toISOString(),
+      type: 'payment'
+    };
+    
+    setUpdates(prev => [update, ...prev]);
+  };
+
+  const recordPayment = (paymentData) => {
+    const newPayment = {
+      id: Date.now().toString(),
+      ...paymentData,
+      status: 'completed',
+      recordedAt: new Date().toISOString()
+    };
+    
+    setPayments(prev => [...prev, newPayment]);
+    
+    // Update payment balances
+    setPaymentBalances(prev => {
+      const updated = { ...prev };
+      updated[paymentData.payerId] = updated[paymentData.payerId] || {};
+      updated[paymentData.payerId][paymentData.receiverId] = 
+        (updated[paymentData.payerId][paymentData.receiverId] || 0) - paymentData.amount;
+      
+      return updated;
+    });
+    
+    // Add update to feed
+    const update = {
+      id: Date.now().toString(),
+      userId: paymentData.payerId,
+      userName: paymentData.payerName,
+      action: 'payment_recorded',
+      message: `paid $${paymentData.amount} to ${paymentData.receiverName}`,
+      timestamp: new Date().toISOString(),
+      type: 'payment'
+    };
+    
+    setUpdates(prev => [update, ...prev]);
+  };
+
+  const getPaymentSummary = () => {
+    const summary = [];
+    
+    Object.entries(paymentBalances).forEach(([payerId, balances]) => {
+      Object.entries(balances).forEach(([receiverId, amount]) => {
+        if (amount > 0) {
+          const payer = participants.find(p => p.id === payerId);
+          const receiver = participants.find(p => p.id === receiverId);
+          
+          if (payer && receiver) {
+            summary.push({
+              payer: payer.name,
+              payerId,
+              receiver: receiver.name,
+              receiverId,
+              amount
+            });
+          }
+        }
+      });
+    });
+    
+    return summary;
   };
 
 return {
@@ -270,6 +381,8 @@ return {
     documents,
     budget,
     expenses,
+    payments,
+    paymentBalances,
     loading,
     error,
     addActivity,
@@ -278,6 +391,9 @@ return {
     deleteDocument,
     addExpense,
     updateExpense,
-    deleteExpense
+    deleteExpense,
+    splitExpense,
+    recordPayment,
+    getPaymentSummary
   };
 };
