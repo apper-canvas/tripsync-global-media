@@ -82,3 +82,39 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .travel-gradient {
+    @apply bg-gradient-to-r from-travel-500 to-travel-600 text-white;
+  }
+  
+  .bali-gradient {
+    @apply bg-gradient-to-r from-bali-500 to-bali-600 text-white;
+  }
+  
+  .paris-gradient {
+    @apply bg-gradient-to-r from-paris-500 to-paris-600 text-white;
+  }
+  
+  .tokyo-gradient {
+    @apply bg-gradient-to-r from-tokyo-500 to-tokyo-600 text-white;
+  }
+  
+  .newyork-gradient {
+    @apply bg-gradient-to-r from-newyork-500 to-newyork-600 text-white;
+  }
+  
+  .travel-card {
+    @apply bg-card/80 backdrop-blur-sm border border-travel-200/50 shadow-lg;
+  }
+  
+  .landmark-bg {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .landmark-overlay {
+    @apply bg-gradient-to-t from-black/60 via-transparent to-transparent;
+  }
+}

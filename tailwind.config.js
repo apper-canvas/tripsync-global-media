@@ -63,18 +63,66 @@ export default {
   				border: 'hsl(var(--sidebar-border))',
   				ring: 'hsl(var(--sidebar-ring))'
   			},
-  			travel: {
-  				50: 'hsl(var(--travel-50))',
-  				100: 'hsl(var(--travel-100))',
-  				200: 'hsl(var(--travel-200))',
-  				300: 'hsl(var(--travel-300))',
-  				400: 'hsl(var(--travel-400))',
-  				500: 'hsl(var(--travel-500))',
-  				600: 'hsl(var(--travel-600))',
-  				700: 'hsl(var(--travel-700))',
-  				800: 'hsl(var(--travel-800))',
-  				900: 'hsl(var(--travel-900))'
-  			}
+travel: {
+				50: 'hsl(var(--travel-50))',
+				100: 'hsl(var(--travel-100))',
+				200: 'hsl(var(--travel-200))',
+				300: 'hsl(var(--travel-300))',
+				400: 'hsl(var(--travel-400))',
+				500: 'hsl(var(--travel-500))',
+				600: 'hsl(var(--travel-600))',
+				700: 'hsl(var(--travel-700))',
+				800: 'hsl(var(--travel-800))',
+				900: 'hsl(var(--travel-900))'
+			},
+			bali: {
+				50: 'hsl(var(--bali-50))',
+				100: 'hsl(var(--bali-100))',
+				200: 'hsl(var(--bali-200))',
+				300: 'hsl(var(--bali-300))',
+				400: 'hsl(var(--bali-400))',
+				500: 'hsl(var(--bali-500))',
+				600: 'hsl(var(--bali-600))',
+				700: 'hsl(var(--bali-700))',
+				800: 'hsl(var(--bali-800))',
+				900: 'hsl(var(--bali-900))'
+			},
+			paris: {
+				50: 'hsl(var(--paris-50))',
+				100: 'hsl(var(--paris-100))',
+				200: 'hsl(var(--paris-200))',
+				300: 'hsl(var(--paris-300))',
+				400: 'hsl(var(--paris-400))',
+				500: 'hsl(var(--paris-500))',
+				600: 'hsl(var(--paris-600))',
+				700: 'hsl(var(--paris-700))',
+				800: 'hsl(var(--paris-800))',
+				900: 'hsl(var(--paris-900))'
+			},
+			tokyo: {
+				50: 'hsl(var(--tokyo-50))',
+				100: 'hsl(var(--tokyo-100))',
+				200: 'hsl(var(--tokyo-200))',
+				300: 'hsl(var(--tokyo-300))',
+				400: 'hsl(var(--tokyo-400))',
+				500: 'hsl(var(--tokyo-500))',
+				600: 'hsl(var(--tokyo-600))',
+				700: 'hsl(var(--tokyo-700))',
+				800: 'hsl(var(--tokyo-800))',
+				900: 'hsl(var(--tokyo-900))'
+			},
+			newyork: {
+				50: 'hsl(var(--newyork-50))',
+				100: 'hsl(var(--newyork-100))',
+				200: 'hsl(var(--newyork-200))',
+				300: 'hsl(var(--newyork-300))',
+				400: 'hsl(var(--newyork-400))',
+				500: 'hsl(var(--newyork-500))',
+				600: 'hsl(var(--newyork-600))',
+				700: 'hsl(var(--newyork-700))',
+				800: 'hsl(var(--newyork-800))',
+				900: 'hsl(var(--newyork-900))'
+			}
   		},
   		keyframes: {
   			'accordion-down': {
@@ -118,7 +166,7 @@ export default {
   			'fade-in': 'fade-in 0.3s ease-out',
   			'slide-in': 'slide-in 0.3s ease-out'
   		}
-  	}
+}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [await import("tailwindcss-animate")],
 }

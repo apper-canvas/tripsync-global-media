@@ -127,7 +127,7 @@ const TripOverviewSection = ({ trip, currentUser }) => {
                     </div>
                   </div>
                   <div className="flex justify-end space-x-2 pt-4">
-                    <Button variant="outline" onClick={() => setIsEditModalOpen(false)}>
+<Button variant="outline" onClick={() => setIsEditModalOpen(false)}>
                       Cancel
                     </Button>
                     <Button onClick={handleSaveChanges} className="travel-gradient">

@@ -15,6 +15,8 @@ const ItineraryPlannerPage = () => {
     { day: 4, date: '2024-03-18', title: 'Beach Day' },
     { day: 5, date: '2024-03-19', title: 'Cultural Activities' }
   ]);
+  
+  const destinationTheme = 'travel';
 
   return (
     <div className="max-w-7xl mx-auto space-y-6">
@@ -39,7 +41,7 @@ const ItineraryPlannerPage = () => {
         </Card>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+<div className="grid grid-cols-1 lg:grid-cols-4 gap-6 relative z-10">
         {/* Day Selector */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -56,11 +58,14 @@ const ItineraryPlannerPage = () => {
                 <Button
                   key={day.day}
                   variant={selectedDay === day.day ? "default" : "ghost"}
-                  className="w-full justify-start"
+                  className={`w-full justify-start ${selectedDay === day.day ? `${destinationTheme}-gradient` : ''}`}
                   onClick={() => setSelectedDay(day.day)}
                 >
                   <div className="flex items-center space-x-3">
-                    <Badge variant="secondary" className="min-w-[24px] h-6 rounded-full">
+                    <Badge 
+                      variant="secondary" 
+                      className={`min-w-[24px] h-6 rounded-full bg-${destinationTheme}-100 text-${destinationTheme}-800`}
+                    >
                       {day.day}
                     </Badge>
                     <div className="text-left">
@@ -84,6 +89,7 @@ const ItineraryPlannerPage = () => {
           <DayTimeline 
             selectedDay={selectedDay} 
             dayInfo={tripDays.find(d => d.day === selectedDay)}
+            destinationTheme={destinationTheme}
           />
         </motion.div>
       </div>
