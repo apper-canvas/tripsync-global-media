@@ -2,6 +2,7 @@ import { useState } from 'react';
 import TripOverviewSection from '../components/features/TripOverviewSection';
 import ParticipantListSection from '../components/features/ParticipantListSection';
 import UpdatesFeedSection from '../components/features/UpdatesFeedSection';
+import DocumentsSection from '../components/features/DocumentsSection';
 import { motion } from 'framer-motion';
 
 const TripDashboardPage = () => {
@@ -34,14 +35,15 @@ const TripDashboardPage = () => {
         />
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="lg:col-span-1"
+          className="lg:col-span-1 space-y-8"
         >
           <ParticipantListSection tripId={trip.id} />
+          <DocumentsSection tripId={trip.id} />
         </motion.div>
 
         <motion.div

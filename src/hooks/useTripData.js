@@ -7,10 +7,11 @@ import { useState, useEffect } from 'react';
  * @config-driven Uses API endpoints from constants/apiConfig
  */
 export const useTripData = (tripId) => {
-  const [trip, setTrip] = useState(null);
+const [trip, setTrip] = useState(null);
   const [participants, setParticipants] = useState([]);
   const [activities, setActivities] = useState([]);
   const [updates, setUpdates] = useState([]);
+  const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -22,7 +23,7 @@ export const useTripData = (tripId) => {
       try {
         setLoading(true);
         
-        // Mock trip data
+// Mock trip data
         const tripData = {
           id: tripId,
           name: 'Bali Adventure',
@@ -33,7 +34,45 @@ export const useTripData = (tripId) => {
           status: 'planning'
         };
 
+        // Mock documents data
+        const documentsData = [
+          {
+            id: 'doc1',
+            name: 'Flight Tickets.pdf',
+            size: 2048576,
+            type: 'application/pdf',
+            uploadedBy: 'user1',
+            uploadedByName: 'Sarah Johnson',
+            uploadedAt: '2024-03-10T10:30:00Z',
+            url: '/mock-files/flight-tickets.pdf',
+            category: 'pdf'
+          },
+          {
+            id: 'doc2',
+            name: 'Hotel Confirmation.pdf',
+            size: 1024768,
+            type: 'application/pdf',
+            uploadedBy: 'user2',
+            uploadedByName: 'Mike Chen',
+            uploadedAt: '2024-03-08T14:20:00Z',
+            url: '/mock-files/hotel-confirmation.pdf',
+            category: 'pdf'
+          },
+          {
+            id: 'doc3',
+            name: 'Bali_Beach_Photos.jpg',
+            size: 3145728,
+            type: 'image/jpeg',
+            uploadedBy: 'user3',
+            uploadedByName: 'Emma Wilson',
+            uploadedAt: '2024-03-05T16:45:00Z',
+            url: '/mock-files/bali-beach.jpg',
+            category: 'image'
+          }
+        ];
+
         setTrip(tripData);
+        setDocuments(documentsData);
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -68,8 +107,45 @@ export const useTripData = (tripId) => {
     setUpdates(prev => [update, ...prev]);
   };
 
-  const updateTrip = (updates) => {
+const updateTrip = (updates) => {
     setTrip(prev => ({ ...prev, ...updates }));
+  };
+
+  const addDocument = (documentData) => {
+    setDocuments(prev => [...prev, documentData]);
+    
+    // Add update to feed
+    const update = {
+      id: Date.now().toString(),
+      userId: documentData.uploadedBy,
+      userName: documentData.uploadedByName,
+      action: 'document_uploaded',
+      message: `uploaded ${documentData.name}`,
+      timestamp: new Date().toISOString(),
+      type: 'document'
+    };
+    
+    setUpdates(prev => [update, ...prev]);
+  };
+
+  const deleteDocument = (documentId) => {
+    const document = documents.find(doc => doc.id === documentId);
+    setDocuments(prev => prev.filter(doc => doc.id !== documentId));
+    
+    if (document) {
+      // Add update to feed
+      const update = {
+        id: Date.now().toString(),
+        userId: 'user1',
+        userName: 'Current User',
+        action: 'document_deleted',
+        message: `deleted ${document.name}`,
+        timestamp: new Date().toISOString(),
+        type: 'document'
+      };
+      
+      setUpdates(prev => [update, ...prev]);
+    }
   };
 
   return {
@@ -77,9 +153,12 @@ export const useTripData = (tripId) => {
     participants,
     activities,
     updates,
+    documents,
     loading,
     error,
     addActivity,
-    updateTrip
+    updateTrip,
+    addDocument,
+    deleteDocument
   };
 };
