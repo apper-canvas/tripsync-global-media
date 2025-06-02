@@ -3,8 +3,8 @@ import TripOverviewSection from '../components/features/TripOverviewSection';
 import ParticipantListSection from '../components/features/ParticipantListSection';
 import UpdatesFeedSection from '../components/features/UpdatesFeedSection';
 import DocumentsSection from '../components/features/DocumentsSection';
+import BudgetSection from '../components/features/BudgetSection';
 import { motion } from 'framer-motion';
-
 const TripDashboardPage = () => {
   const [trip] = useState({
     id: '1',
