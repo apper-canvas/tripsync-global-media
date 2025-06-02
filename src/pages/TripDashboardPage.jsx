@@ -1,0 +1,60 @@
+import { useState } from 'react';
+import TripOverviewSection from '../components/features/TripOverviewSection';
+import ParticipantListSection from '../components/features/ParticipantListSection';
+import UpdatesFeedSection from '../components/features/UpdatesFeedSection';
+import { motion } from 'framer-motion';
+
+const TripDashboardPage = () => {
+  const [trip] = useState({
+    id: '1',
+    name: 'Bali Adventure',
+    destination: 'Bali, Indonesia',
+    startDate: '2024-03-15',
+    endDate: '2024-03-25',
+    creatorId: 'user1',
+    status: 'planning'
+  });
+
+  const [currentUser] = useState({
+    id: 'user1',
+    name: 'Sarah Johnson',
+    email: 'sarah@example.com'
+  });
+
+  return (
+    <div className="max-w-7xl mx-auto space-y-8">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <TripOverviewSection 
+          trip={trip} 
+          currentUser={currentUser}
+        />
+      </motion.div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="lg:col-span-1"
+        >
+          <ParticipantListSection tripId={trip.id} />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="lg:col-span-2"
+        >
+          <UpdatesFeedSection tripId={trip.id} />
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
+export default TripDashboardPage;
