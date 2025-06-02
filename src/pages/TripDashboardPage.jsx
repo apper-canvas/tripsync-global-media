@@ -41,8 +41,9 @@ const TripDashboardPage = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="lg:col-span-1 space-y-8"
-        >
+>
           <ParticipantListSection tripId={trip.id} />
+          <BudgetSection tripId={trip.id} />
           <DocumentsSection tripId={trip.id} />
         </motion.div>
 
