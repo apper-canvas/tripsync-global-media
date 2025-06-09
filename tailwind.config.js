@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import tailwindcssAnimate from "tailwindcss-animate";
+
 export default {
     darkMode: ["class"],
     content: [
@@ -61,19 +63,19 @@ export default {
   				accent: 'hsl(var(--sidebar-accent))',
   				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
   				border: 'hsl(var(--sidebar-border))',
-ring: 'hsl(var(--sidebar-ring))'
+  				ring: 'hsl(var(--sidebar-ring))'
   			},
   			travel: {
   				50: 'hsl(var(--travel-50))',
   				100: 'hsl(var(--travel-100))',
-				200: 'hsl(var(--travel-200))',
-				300: 'hsl(var(--travel-300))',
-				400: 'hsl(var(--travel-400))',
-				500: 'hsl(var(--travel-500))',
-				600: 'hsl(var(--travel-600))',
-				700: 'hsl(var(--travel-700))',
-				800: 'hsl(var(--travel-800))',
-				900: 'hsl(var(--travel-900))'
+  				200: 'hsl(var(--travel-200))',
+  				300: 'hsl(var(--travel-300))',
+  				400: 'hsl(var(--travel-400))',
+  				500: 'hsl(var(--travel-500))',
+  				600: 'hsl(var(--travel-600))',
+  				700: 'hsl(var(--travel-700))',
+  				800: 'hsl(var(--travel-800))',
+  				900: 'hsl(var(--travel-900))'
 			},
 			bali: {
 				50: 'hsl(var(--bali-50))',
@@ -165,8 +167,8 @@ ring: 'hsl(var(--sidebar-ring))'
   			'accordion-up': 'accordion-up 0.2s ease-out',
   			'fade-in': 'fade-in 0.3s ease-out',
   			'slide-in': 'slide-in 0.3s ease-out'
-  		}
 }
+	}
   },
-  plugins: [await import("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 }
